@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geography Quiz</title>
+<style>
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+
+  .quiz {
+    margin-bottom: 20px;
+  }
+
+  .question {
+    margin-bottom: 10px;
+  }
+
+  .options label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Geography Quiz</h1>
+  <div class="quiz" id="quiz">
+    <div class="question" id="question">Loading question...</div>
+    <div class="options" id="options"></div>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+</div>
+
+<script>
+  const questions = [
+    { question: "What is the capital of France?", options: ["Paris", "London", "Berlin", "Rome"], answer: "Paris" },
+    { question: "What is the capital of Canada?", options: ["Toronto", "Vancouver", "Ottawa", "Montreal"], answer: "Ottawa" },
+    { question: "Which river is the longest in the world?", options: ["Amazon", "Nile", "Mississippi", "Yangtze"], answer: "Nile" },
+    { question: "Which desert is the largest in the world?", options: ["Sahara", "Gobi", "Arabian", "Kalahari"], answer: "Sahara" },
+    { question: "What is the tallest mountain in the world?", options: ["Everest", "K2", "Kangchenjunga", "Lhotse"], answer: "Everest" },
+    { question: "What is the smallest country in the world?", options: ["Monaco", "Vatican City", "Maldives", "Nauru"], answer: "Vatican City" },
+    { question: "Which continent is the driest?", options: ["Africa", "Australia", "South America", "Antarctica"], answer: "Antarctica" },
+    { question: "What is the longest river in Europe?", options: ["Volga", "Danube", "Rhine", "Loire"], answer: "Volga" },
+    { question: "What is the largest island in the Mediterranean Sea?", options: ["Cyprus", "Crete", "Sicily", "Corsica"], answer: "Sicily" },
+    { question: "Which country is known as the 'Land of the Rising Sun'?", options: ["China", "Korea", "Japan", "Vietnam"], answer: "Japan" },
+    { question: "What is the largest country in Africa by land area?", options: ["Nigeria", "Egypt", "Algeria", "South Africa"], answer: "Algeria" },
+    { question: "What is the capital of Australia?", options: ["Sydney", "Melbourne", "Canberra", "Brisbane"], answer: "Canberra" },
+    { question: "Which ocean is the largest?", options: ["Atlantic", "Indian", "Pacific", "Arctic"], answer: "Pacific" },
+    { question: "Which country is known as the 'Land of Fire and Ice'?", options: ["Greenland", "Iceland", "Norway", "Finland"], answer: "Iceland" },
+    { question: "What is the highest waterfall in the world?", options: ["Angel Falls", "Niagara Falls", "Victoria Falls", "Iguazu Falls"], answer: "Angel Falls" },
+  ];
+
+  let currentQuestionIndex = 0;
+
+  function loadQuestion() {
+    const currentQuestion = questions[currentQuestionIndex];
+    const questionElement = document.getElementById("question");
+    const optionsElement = document.getElementById("options");
+
+    questionElement.textContent = currentQuestion.question;
+    optionsElement.innerHTML = "";
+
+    currentQuestion.options.forEach((option, index) => {
+      const label = document.createElement("label");
+      label.innerHTML = `<input type="radio" name="option" value="${option}"> ${option}`;
+      optionsElement.appendChild(label);
+    });
+  }
+
+  function nextQuestion() {
+    const selectedOption = document.querySelector("input[name='option']:checked");
+
+    if (!selectedOption) {
+      alert("Please select an option");
+      return;
+    }
+
+    if (selectedOption.value === questions[currentQuestionIndex].answer) {
+      alert("Correct!");
+    } else {
+      alert(`Incorrect! The correct answer is ${questions[currentQuestionIndex].answer}`);
+    }
+
+    currentQuestionIndex++;
+    if (currentQuestionIndex < 15) {
+      loadQuestion();
+    } else {
+      alert("Quiz completed!");
+    }
+  }
+
+  loadQuestion();
+</script>
+
+</body>
+</html>
