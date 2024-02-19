@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+/* CSS for styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  width: 400px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+input[type="text"] {
+  width: calc(100% - 40px);
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  font-size: 16px;
+}
+
+input[type="text"]:focus {
+  border-bottom-color: #4CAF50;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+  position: relative;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+.delete {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #f44336;
+  cursor: pointer;
+}
+
+.delete:hover {
+  color: #d32f2f;
+}
+
+.addBtn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.addBtn:hover {
+  background-color: #45a049;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>To-Do List</h1>
+  <input type="text" id="taskInput" placeholder="Add new task...">
+  <button class="addBtn" onclick="addTask()">Add</button>
+  <ul id="taskList"></ul>
+</div>
+
+<script>
+// JavaScript for functionality
+function addTask() {
+  var inputValue = document.getElementById("taskInput").value;
+  if (inputValue === '') {
+    alert("Please enter a task!");
+    return;
+  }
+  var li = document.createElement("li");
+  li.appendChild(document.createTextNode(inputValue));
+  document.getElementById("taskList").appendChild(li);
+  document.getElementById("taskInput").value = "";
+
+  var span = document.createElement("span");
+  var txt = document.createTextNode("✖");
+  span.className = "delete";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  span.onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  };
+}
+</script>
+
+</body>
+</html>
