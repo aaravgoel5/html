@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess the Number</title>
+  <style>
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #212121;
+      color: #ffffff;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 50px;
+      font-size: 36px;
+      letter-spacing: 2px;
+    }
+    p {
+      font-size: 18px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 2px solid #4CAF50;
+      background-color: #424242;
+      color: #ffffff;
+      outline: none;
+    }
+    #guessButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
+    #guessButton:hover {
+      background-color: #45a049;
+    }
+    #guessMessage {
+      margin-top: 20px;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Guess the Number (between 1 and 100)</h1>
+
+<p>Enter your guess:</p>
+<input type="text" id="guessField">
+<br>
+<button id="guessButton" onclick="checkGuess()">Submit Guess</button>
+
+<p id="guessMessage"></p>
+
+<script>
+  const randomNumber = Math.floor(Math.random() * 100) + 1;
+  let guessCount = 0;
+
+  function checkGuess() {
+    const guess = parseInt(document.getElementById('guessField').value);
+    if (isNaN(guess) || guess < 1 || guess > 100) {
+      document.getElementById('guessMessage').innerText = 'Please enter a valid number between 1 and 100.';
+    } else {
+      guessCount++;
+      if (guess === randomNumber) {
+        document.getElementById('guessMessage').innerText = `Congratulations! You guessed the number in ${guessCount} attempts.`;
+        disableInput();
+      } else if (guessCount === 10) {
+        document.getElementById('guessMessage').innerText = `Sorry, you've reached the maximum number of attempts. The number was ${randomNumber}.`;
+        disableInput();
+      } else if (guess < randomNumber) {
+        document.getElementById('guessMessage').innerText = 'Too low! Try again.';
+      } else {
+        document.getElementById('guessMessage').innerText = 'Too high! Try again.';
+      }
+      document.getElementById('guessField').value = '';
+    }
+  }
+
+  function disableInput() {
+    document.getElementById('guessField').disabled = true;
+    document.getElementById('guessButton').disabled = true;
+  }
+</script>
+
+</body>
+</html>
